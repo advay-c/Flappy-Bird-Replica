@@ -19,13 +19,13 @@ ground_image = pygame.image.load(os.path.join('imgs', 'sky_bottom.png'))
 ground_width = ground_image.get_width()
 
 def display_score():
-    font = pygame.font.SysFont('Inter', 40)
-    text = font.render("Score: " + str(SCORE), True, (255, 255, 255))
+    font = pygame.font.Font(os.path.join('imgs', 'font.otf'), 55)
+    text = font.render("Score: " + str(SCORE), True, (0, 0, 0))
     WINDOW.blit(text, (10, 10))
 
 def update_score():
     global SCORE
-    SCORE += 1
+    SCORE += 1 # increase score by one 
 
 class Ground(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -93,7 +93,7 @@ while running:
         pipe_x = WIDTH
         pipe_height = generate_pipe_height()  # Random height for the pipes
         pipe_y_bottom = pipe_height + pipe_gap  # Calculate the y position of the bottom pipe
-        update_score()  # Update the score
+        update_score()  # Update the score when pipe goes off screen
 
     WINDOW.blit(PIPE_TOP, (pipe_x, pipe_height - PIPE_TOP.get_height()))  # Draw the top pipe
     WINDOW.blit(PIPE_BOTTOM, (pipe_x, pipe_y_bottom))  # Draw the bottom pipe
