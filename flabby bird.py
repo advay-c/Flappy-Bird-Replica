@@ -8,7 +8,7 @@ BIRD_HEIGHT = 110
 BIRD_WIDTH = 110
 VEL = 5
 PIPE_WIDTH = 100
-pipe_vel = 7  # Adjust this value to control the pipe movement speed
+pipe_vel = 7  # controls pipe and game speed
 SCORE = 0
 
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -25,7 +25,7 @@ def display_score():
 
 def update_score():
     global SCORE
-    SCORE += 1 # increase score by one 
+    SCORE += 1 # increase score by one per second
 
 class Ground(pygame.sprite.Sprite):
     def __init__(self, x, y):
