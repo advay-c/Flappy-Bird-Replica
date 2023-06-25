@@ -113,7 +113,7 @@ class Button():
 
         return action
 
-button = Button(WIDTH // 2 - 50, HEIGHT // 2 - 100, restart)
+button = Button(WIDTH // 2 - 65, HEIGHT // 2 - 15, restart)
 
 running = True
 clock = pygame.time.Clock()
