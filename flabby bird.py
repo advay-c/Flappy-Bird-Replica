@@ -113,7 +113,7 @@ while running:
             bird_movey = jump_velocity
 
     if not game_over:
-        if check_collision() and not falling:
+        if check_collision():
             falling = True
             bird_movey = collision_gravity  # Make the bird fall very fast after collision
             pipe_vel = 0  # Pause the pipe movement
