@@ -163,9 +163,8 @@ while running:
         bird_y += bird_movey  # Update the bird's position with vertical movement
 
         if bird_y >= HEIGHT - BIRD_HEIGHT:  # Check if the bird hits the ground again
-            game_over_text = pygame.image.load(os.path.join('imgs', 'Game_Over.png'))
-            game_over_rect = game_over_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
-            WINDOW.blit(game_over_text, game_over_rect)
+            game_over_text = pygame.image.load(os.path.join('imgs', 'gameover.png'))
+            WINDOW.blit(game_over_text, (200, 255)
 
     pygame.display.update()
 
