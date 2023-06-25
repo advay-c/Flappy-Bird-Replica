@@ -17,6 +17,7 @@ pygame.display.set_caption("Flappy Bird")
 
 SKY = pygame.image.load(os.path.join('imgs', 'skyd.png'))
 ground_image = pygame.image.load(os.path.join('imgs', 'sky_bottom.png'))
+restart = pygame.image.load(os.path.join('imgs', 'restart.png'))
 ground_width = ground_image.get_width()
 
 def display_score():
@@ -91,6 +92,29 @@ def check_collision():
 
     return collision_top or collision_bottom
 
+class Button():
+    def __init__(self, x, y, image):
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
+    def draw(self, window):
+
+        action = False
+
+        pos = pygame.mouse.get_pos()
+
+        #check if mouse is over button
+        if self.rect.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1:
+                action = True
+                
+        window.blit(self.image, (self.rect.x, self.rect.y))
+
+        return action
+
+button = Button(WIDTH // 2 - 50, HEIGHT // 2 - 100, restart)
+
 running = True
 clock = pygame.time.Clock()
 game_over = False
@@ -98,6 +122,18 @@ falling = True
 bird_gravity = 0.4  # Gravity applied to the bird
 collision_gravity = 8  # Gravity applied to the bird after collision
 jump_velocity = -7  # Velocity applied when the bird jumps
+
+def restart_game():
+    global bird_y, bird_movey, pipe_x, pipe_height, pipe_y_bottom, SCORE, game_over, falling, pipe_vel
+    bird_y = HEIGHT // 2 - BIRD_HEIGHT // 2
+    bird_movey = 0
+    pipe_x = WIDTH + PIPE_WIDTH
+    pipe_height = generate_pipe_height()
+    pipe_y_bottom = pipe_height + pipe_gap
+    SCORE = 0
+    game_over = False
+    falling = True
+    pipe_vel = 5
 
 while running:
     clock.tick(60)  # Limit the frame rate to 60 FPS
@@ -160,13 +196,19 @@ while running:
         bird_movey = collision_gravity  # Make the bird fall very fast after hitting the ground
         pipe_vel = 0  # Pause the pipe movement
 
+        if button.draw(WINDOW) == True:
+            game_over = False
+
+        mouse_pos = pygame.mouse.get_pos()
+        if event.type == pygame.MOUSEBUTTONDOWN and button.rect.collidepoint(mouse_pos):
+            restart_game()
+
         bird_y += bird_movey  # Update the bird's position with vertical movement
 
         if bird_y >= HEIGHT - BIRD_HEIGHT:  # Check if the bird hits the ground again
             game_over_text = pygame.image.load(os.path.join('imgs', 'gameover.png'))
-            WINDOW.blit(game_over_text, (200, 255)
+            WINDOW.blit(game_over_text, (200, 255))
 
     pygame.display.update()
 
 pygame.quit()
-
