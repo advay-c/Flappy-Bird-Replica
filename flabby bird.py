@@ -9,7 +9,7 @@ BIRD_HEIGHT = 110
 BIRD_WIDTH = 110
 VEL = 5
 PIPE_WIDTH = 100
-pipe_vel = 7  # controls pipe and game speed
+pipe_vel = 5  # controls pipe and game speed
 SCORE = 0
 
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -21,8 +21,8 @@ ground_width = ground_image.get_width()
 
 def display_score():
     font = pygame.font.Font(os.path.join('imgs', 'font.otf'), 55)
-    text = font.render("Score: " + str(SCORE), True, (0, 0, 0))
-    WINDOW.blit(text, (10, 10))
+    text = font.render(str(SCORE), True, (0, 0, 0))
+    WINDOW.blit(text, (295, 90))
 
 def update_score():
     global SCORE
@@ -55,6 +55,8 @@ bird_x = WIDTH // 2 - BIRD_WIDTH // 2  # Initial x position of the bird
 bird_y = HEIGHT // 2 - BIRD_HEIGHT // 2  # Initial y position of the bird
 
 bird_movey = 0  # Vertical movement of the bird
+bird_gravity = 0.4  # Normal gravity value
+collision_gravity = 4  # Gravity value when collision occurs
 
 pipe_x = WIDTH + PIPE_WIDTH  # Initial x position of the pipes
 pipe_gap = 200  # Gap between the top and bottom pipes
@@ -69,7 +71,7 @@ pipe_y_bottom = pipe_height + pipe_gap  # Calculate the y position of the bottom
 
 def gravity():
     global bird_movey
-    bird_movey += 0.2  # Increase the bird's vertical movement
+    bird_movey += bird_gravity  # Increase the bird's vertical movement with gravity
 
 def check_collision():
     bird_rect = BIRD.get_rect(topleft=(bird_x, bird_y))
@@ -92,6 +94,10 @@ def check_collision():
 running = True
 clock = pygame.time.Clock()
 game_over = False
+falling = True
+bird_gravity = 0.4  # Gravity applied to the bird
+collision_gravity = 8  # Gravity applied to the bird after collision
+jump_velocity = -7  # Velocity applied when the bird jumps
 
 while running:
     clock.tick(60)  # Limit the frame rate to 60 FPS
@@ -103,11 +109,17 @@ while running:
     keys_pressed = pygame.key.get_pressed()  # Get the state of all keyboard keys
 
     if keys_pressed[pygame.K_SPACE] or keys_pressed[pygame.K_w] or keys_pressed[pygame.K_UP]:  # Flap the bird
-        bird_movey = -6
+        if not game_over:
+            bird_movey = jump_velocity
 
     if not game_over:
-        if check_collision():
-            game_over = True
+        if check_collision() and not falling:
+            falling = True
+            bird_movey = collision_gravity  # Make the bird fall very fast after collision
+            pipe_vel = 0  # Pause the pipe movement
+
+        if falling:
+            bird_movey += bird_gravity  # Apply gravity to the falling bird
 
         pipe_x -= pipe_vel  # Move the pipe towards the bird
 
@@ -132,7 +144,6 @@ while running:
 
         pygame.display.update()
 
-        gravity()  # Apply gravity to the bird
         bird_y += bird_movey  # Update the bird's position with vertical movement
 
         # Ensure the bird stays within the screen bounds
@@ -142,13 +153,21 @@ while running:
         elif bird_y > HEIGHT - BIRD_HEIGHT:  # Restrict going below y=height-BIRD_HEIGHT
             bird_y = HEIGHT - BIRD_HEIGHT
             bird_movey = 0
+            if not game_over:
+                game_over = True  # Set game over when the bird hits the ground
 
     if game_over:
-        font = pygame.font.Font(None, 70)
-        game_over_text = pygame.image.load(os.path.join('imgs', 'Game_Over.png'))
-        game_over_rect = game_over_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
-        WINDOW.blit(game_over_text, game_over_rect)
+        bird_movey = collision_gravity  # Make the bird fall very fast after hitting the ground
+        pipe_vel = 0  # Pause the pipe movement
+
+        bird_y += bird_movey  # Update the bird's position with vertical movement
+
+        if bird_y >= HEIGHT - BIRD_HEIGHT:  # Check if the bird hits the ground again
+            game_over_text = pygame.image.load(os.path.join('imgs', 'Game_Over.png'))
+            game_over_rect = game_over_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+            WINDOW.blit(game_over_text, game_over_rect)
 
     pygame.display.update()
 
 pygame.quit()
+
