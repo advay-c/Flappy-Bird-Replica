@@ -9,7 +9,7 @@ BIRD_HEIGHT = 110
 BIRD_WIDTH = 110
 VEL = 5
 PIPE_WIDTH = 100
-pipe_vel = 5  # controls pipe and game speed
+pipe_vel = 6  # controls pipe and game speed
 SCORE = 0
 
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
