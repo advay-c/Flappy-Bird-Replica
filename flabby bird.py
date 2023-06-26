@@ -136,7 +136,7 @@ def restart_game():
     pipe_vel = 5
 
 while running:
-    clock.tick(60)  # Limit the frame rate to 60 FPS
+    clock.tick(60)  # makes frame rate 60 FPS
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
