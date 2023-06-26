@@ -118,7 +118,7 @@ button = Button(WIDTH // 2 - 65, HEIGHT // 2 - 15, restart)
 running = True
 clock = pygame.time.Clock()
 game_over = False
-falling = True
+falling = True #makes seperate function for falling bird
 bird_gravity = 0.4  # Gravity applied to the bird
 collision_gravity = 8  # Gravity applied to the bird after collision
 jump_velocity = -7  # Velocity applied when the bird jumps
@@ -157,7 +157,7 @@ while running:
         if falling:
             bird_movey += bird_gravity  # Apply gravity to the falling bird
 
-        pipe_x -= pipe_vel  # Move the pipe towards the bird
+        pipe_x -= pipe_vel 
 
         # If the pipe reaches the left side of the screen, reset its position
         if pipe_x < -PIPE_WIDTH:
