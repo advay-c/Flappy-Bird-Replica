@@ -4,10 +4,11 @@ import random
 
 pygame.font.init()
 
-WIDTH, HEIGHT = 609, 663 #sets the width and height of the window
-BIRD_HEIGHT, BIRD_WIDTH = 100, 100 #controls size of the bird
+WIDTH, HEIGHT = 609, 663
+BIRD_HEIGHT = 110
+BIRD_WIDTH = 110
 VEL = 5
-PIPE_WIDTH = 100 # controls size of the pipe
+PIPE_WIDTH = 100
 pipe_vel = 6  # controls pipe and game speed
 SCORE = 0
 
@@ -117,7 +118,7 @@ button = Button(WIDTH // 2 - 65, HEIGHT // 2 - 15, restart)
 running = True
 clock = pygame.time.Clock()
 game_over = False
-falling = True #makes seperate function for falling bird
+falling = True
 bird_gravity = 0.4  # Gravity applied to the bird
 collision_gravity = 8  # Gravity applied to the bird after collision
 jump_velocity = -7  # Velocity applied when the bird jumps
@@ -135,7 +136,7 @@ def restart_game():
     pipe_vel = 5
 
 while running:
-    clock.tick(60)  # makes frame rate 60 FPS
+    clock.tick(60)  # Limit the frame rate to 60 FPS
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -156,7 +157,7 @@ while running:
         if falling:
             bird_movey += bird_gravity  # Apply gravity to the falling bird
 
-        pipe_x -= pipe_vel 
+        pipe_x -= pipe_vel  # Move the pipe towards the bird
 
         # If the pipe reaches the left side of the screen, reset its position
         if pipe_x < -PIPE_WIDTH:
@@ -180,6 +181,8 @@ while running:
         pygame.display.update()
 
         bird_y += bird_movey  # Update the bird's position with vertical movement
+        if bird_y >= 487.21:
+            game_over = True
 
         # Ensure the bird stays within the screen bounds
         if bird_y < 0:  # Restrict going above y=0
@@ -211,3 +214,4 @@ while running:
     pygame.display.update()
 
 pygame.quit()
+
