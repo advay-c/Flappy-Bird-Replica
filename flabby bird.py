@@ -5,7 +5,7 @@ import random
 pygame.font.init()
 
 WIDTH, HEIGHT = 609, 663 #sets the width and height of the window
-BIRD_HEIGHT, BIRD_WIDTH = 110, 110
+BIRD_HEIGHT, BIRD_WIDTH = 110, 110 #controls size of the bird
 VEL = 5
 PIPE_WIDTH = 100
 pipe_vel = 6  # controls pipe and game speed
