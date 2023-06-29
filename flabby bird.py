@@ -13,7 +13,7 @@ pipe_vel = 6  # controls pipe and game speed
 SCORE = 0
 
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Flappy Bird")
+pygame.display.set_caption("Flappy Bird") #sets caption of the window
 
 SKY = pygame.image.load(os.path.join('imgs', 'skyd.png'))
 ground_image = pygame.image.load(os.path.join('imgs', 'sky_bottom.png'))
