@@ -123,7 +123,7 @@ bird_gravity = 0.4  # Gravity applied to the bird
 collision_gravity = 8  # Gravity applied to the bird after collision
 jump_velocity = -7  # Velocity applied when the bird jumps
 
-def restart_game():
+def restart_game(): #restarting the game function
     global bird_y, bird_movey, pipe_x, pipe_height, pipe_y_bottom, SCORE, game_over, falling, pipe_vel
     bird_y = HEIGHT // 2 - BIRD_HEIGHT // 2
     bird_movey = 0
