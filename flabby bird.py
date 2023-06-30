@@ -113,7 +113,7 @@ class Button():
 
         return action
 
-button = Button(WIDTH // 2 - 65, HEIGHT // 2 - 15, restart)
+button = Button(WIDTH // 2 - 65, HEIGHT // 2 - 15, restart) #sets width and height of restart button
 
 running = True
 clock = pygame.time.Clock()
