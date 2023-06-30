@@ -27,7 +27,7 @@ def display_score():
 
 def update_score():
     global SCORE
-    SCORE += 1  # increase score by one per second
+    SCORE += 1  # increase score by one 
 
 class Ground(pygame.sprite.Sprite):
     def __init__(self, x, y):
