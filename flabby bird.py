@@ -202,7 +202,7 @@ while running:
             game_over = False
 
         mouse_pos = pygame.mouse.get_pos()
-        if event.type == pygame.MOUSEBUTTONDOWN and button.rect.collidepoint(mouse_pos):
+        if event.type == pygame.MOUSEBUTTONDOWN and button.rect.collidepoint(mouse_pos): #restarts the game when mouse clicks on restart button
             restart_game()
 
         bird_y += bird_movey  # Update the bird's position with vertical movement
