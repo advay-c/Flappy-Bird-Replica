@@ -176,7 +176,7 @@ while running:
 
         WINDOW.blit(BIRD, (bird_x, bird_y))  # Draw the bird at its updated position
 
-        display_score()  # Display the score
+        display_score()  
 
         pygame.display.update()
 
