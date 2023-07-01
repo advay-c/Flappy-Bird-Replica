@@ -18,6 +18,7 @@ pygame.display.set_caption("Flappy Bird") #sets caption of the window
 SKY = pygame.image.load(os.path.join('imgs', 'skyd.png'))
 ground_image = pygame.image.load(os.path.join('imgs', 'sky_bottom.png'))
 restart = pygame.image.load(os.path.join('imgs', 'restart.png'))
+
 ground_width = ground_image.get_width()
 
 def display_score():
