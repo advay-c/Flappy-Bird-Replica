@@ -10,7 +10,7 @@ BIRD_WIDTH = 110
 VEL = 5
 PIPE_WIDTH = 100
 pipe_vel = 6
-SCORE = 0
+SCORE = 2
 
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Flappy Bird")
