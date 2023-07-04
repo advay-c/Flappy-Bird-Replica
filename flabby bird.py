@@ -27,7 +27,7 @@ def main_menu():
     pygame.display.set_caption("Menu")
     while True:
         WINDOW.blit(BG, (0, 0))
-        WINDOW.blit(MS, (212, 185))
+        WINDOW.blit(MS, (207, 170))
         MENU_MOUSE_POS = pygame.mouse.get_pos()
 
         for event in pygame.event.get():
@@ -155,6 +155,8 @@ def restart_game():
     pipe_vel = 5
     game_started = False
 
+main_menu()  # Show the main menu screen initially
+
 while running:
     clock.tick(60)
 
@@ -166,8 +168,8 @@ while running:
 
     if not game_started:
         if keys_pressed[pygame.K_SPACE] or keys_pressed[pygame.K_w] or keys_pressed[pygame.K_UP]:
-            main_menu()
             game_started = True
+            continue  # Skip the rest of the loop and start the next iteration
 
     if game_started and not game_over:
         if keys_pressed[pygame.K_SPACE] or keys_pressed[pygame.K_w] or keys_pressed[pygame.K_UP]:
