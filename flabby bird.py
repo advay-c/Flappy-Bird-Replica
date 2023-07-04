@@ -120,16 +120,12 @@ class Button():
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
 
+    def is_clicked(self):
+        return pygame.mouse.get_pressed()[0] == 1 and self.rect.collidepoint(pygame.mouse.get_pos())
+
     def draw(self, window):
-        action = False
-        pos = pygame.mouse.get_pos()
-
-        if self.rect.collidepoint(pos):
-            if pygame.mouse.get_pressed()[0] == 1:
-                action = True
-
         window.blit(self.image, (self.rect.x, self.rect.y))
-        return action
+
 
 button = Button(WIDTH // 2 - 65, HEIGHT // 2 - 15, restart)
 
@@ -169,7 +165,7 @@ while running:
     if not game_started:
         if keys_pressed[pygame.K_SPACE] or keys_pressed[pygame.K_w] or keys_pressed[pygame.K_UP]:
             game_started = True
-            continue  # Skip the rest of the loop and start the next iteration
+            continue
 
     if game_started and not game_over:
         if keys_pressed[pygame.K_SPACE] or keys_pressed[pygame.K_w] or keys_pressed[pygame.K_UP]:
