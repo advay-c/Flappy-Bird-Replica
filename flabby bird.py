@@ -163,7 +163,7 @@ while running:
     keys_pressed = pygame.key.get_pressed()
 
     if not game_started:
-        if keys_pressed[pygame.K_SPACE] or keys_pressed[pygame.K_w] or keys_pressed[pygame.K_UP] or pygame.mouse.get_pressed()[0]: #makes game start with up aarow, space bar and w key
+        if keys_pressed[pygame.K_SPACE] or keys_pressed[pygame.K_w] or keys_pressed[pygame.K_UP] or pygame.mouse.get_pressed()[0] == 1:
             game_started = True
             continue
 
@@ -231,4 +231,3 @@ while running:
 
 pygame.quit()
 
-pygame.quit()
