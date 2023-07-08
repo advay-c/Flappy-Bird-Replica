@@ -24,7 +24,6 @@ MS = pygame.image.load(os.path.join('imgs', 'message.png'))
 ground_width = ground_image.get_width()
 
 def main_menu():
-    pygame.display.set_caption("Menu")
     while True:
         WINDOW.blit(BG, (0, 0))
         WINDOW.blit(MS, (207, 170))
