@@ -15,11 +15,12 @@ SCORE = 0
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Flappy Bird")
 
-SKY = pygame.image.load(os.path.join('imgs', 'skyd.png'))
-ground_image = pygame.image.load(os.path.join('imgs', 'sky_bottom.png'))
-restart = pygame.image.load(os.path.join('imgs', 'restart.png'))
-BG = pygame.image.load(os.path.join('imgs', 'BG.png'))
-MS = pygame.image.load(os.path.join('imgs', 'message.png'))
+SKY = pygame.image.load(os.path.join('flappy bird', 'imgs', 'skyd.png'))
+ground_image = pygame.image.load(os.path.join('flappy bird', 'imgs', 'sky_bottom.png'))
+restart = pygame.image.load(os.path.join('flappy bird', 'imgs', 'restart.png'))
+BG = pygame.image.load(os.path.join('flappy bird', 'imgs', 'BG.png'))
+SOUND = pygame.mixer.Sound(os.path.join('flappy bird', 'imgs', 'coin.wav'))
+MS = pygame.image.load(os.path.join('flappy bird', 'imgs', 'message.png'))
 
 ground_width = ground_image.get_width()
 
@@ -41,7 +42,7 @@ def main_menu():
         pygame.display.update()
 
 def display_score():
-    font = pygame.font.Font(os.path.join('imgs', 'font.otf'), 55)
+    font = pygame.font.Font(os.path.join('flappy bird', 'imgs', 'font.otf'), 55)
     text = font.render(str(SCORE), True, (0, 0, 0))
     WINDOW.blit(text, (295, 90))
 
@@ -66,10 +67,10 @@ class Ground(pygame.sprite.Sprite):
 
 ground = Ground(0, HEIGHT - ground_image.get_height())
 
-PIPE_TOP = pygame.image.load(os.path.join('imgs', 'pipe_top.png'))
-PIPE_BOTTOM = pygame.image.load(os.path.join('imgs', 'pipe_bottom.png'))
+PIPE_TOP = pygame.image.load(os.path.join('flappy bird', 'imgs', 'pipe_top.png'))
+PIPE_BOTTOM = pygame.image.load(os.path.join('flappy bird', 'imgs', 'pipe_bottom.png'))
 
-BIRD = pygame.image.load(os.path.join('imgs', 'bird.png'))
+BIRD = pygame.image.load(os.path.join('flappy bird', 'imgs', 'bird.png'))
 BIRD = pygame.transform.scale(BIRD, (BIRD_WIDTH, BIRD_HEIGHT))
 
 bird_x = WIDTH // 2 - BIRD_WIDTH // 2
@@ -185,6 +186,8 @@ while running:
             pipe_x = WIDTH
             pipe_height = generate_pipe_height()
             pipe_y_bottom = pipe_height + pipe_gap
+            pygame.mixer.Sound.play(SOUND)
+            pygame.mixer.music.stop()
             update_score()
 
         WINDOW.blit(SKY, (0, 0))
@@ -223,7 +226,7 @@ while running:
         bird_y += bird_movey
 
         if bird_y >= HEIGHT - BIRD_HEIGHT:
-            game_over_text = pygame.image.load(os.path.join('imgs', 'gameover.png'))
+            game_over_text = pygame.image.load(os.path.join('flappy bird', 'imgs', 'gameover.png'))
             WINDOW.blit(game_over_text, (200, 255))
 
     pygame.display.update()
