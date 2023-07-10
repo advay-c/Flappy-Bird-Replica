@@ -3,6 +3,7 @@ import os
 import random
 
 pygame.font.init()
+pygame.mixer.init()
 
 WIDTH, HEIGHT = 609, 663
 BIRD_HEIGHT = 110
