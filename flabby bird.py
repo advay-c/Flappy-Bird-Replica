@@ -15,7 +15,7 @@ SCORE = 0
 
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Flappy Bird")
-
+TEXT_B = pygame.image.load(os.path.join('flappy bird', 'imgs', 'score_boarder.png'))
 SKY = pygame.image.load(os.path.join('flappy bird', 'imgs', 'skyd.png'))
 ground_image = pygame.image.load(os.path.join('flappy bird', 'imgs', 'sky_bottom.png'))
 restart = pygame.image.load(os.path.join('flappy bird', 'imgs', 'restart.png'))
@@ -45,7 +45,9 @@ def main_menu():
 def display_score():
     font = pygame.font.Font(os.path.join('flappy bird', 'imgs', 'font.otf'), 55)
     text = font.render(str(SCORE), True, (0, 0, 0))
+    WINDOW.blit(TEXT_B, (257, 75))
     WINDOW.blit(text, (295, 90))
+
 
 def update_score():
     global SCORE
